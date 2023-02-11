@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandwich</title>
+    <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragment/header :: header}"></th:block>
+<main>
+
+    <h1>An error has occured</h1>
+    <div>
+        <p>error message : <span th:text="${ex.message}"></span> </p>
+        <p>error data : <span th:text="${ex.innerData}"></span></p>
+    </div>
+    <a class="btn btn-danger" th:href="${previous}">Back</a>
+</main>
+<th:block th:replace="~{fragment/footer :: footer}"></th:block>
+<th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+</body>
+</html>

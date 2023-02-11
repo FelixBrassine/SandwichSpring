@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandwich</title>
+    <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragment/header :: header}"></th:block>
+<main>
+    <h1>Sandwich insert form</h1>
+    <form action="/sandwich/add" method="post" th:object="${form}">
+        <div class="mb-3">
+            <div>
+                <label class="form-label" for="in-name">name : </label><br/>
+                <input class="form-control" type="text", id="in-name" th:field="*{name}">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+            <div>
+                <label class="form-label"  for="in-price">price : </label><br/>
+                <input class="form-control" type="number", id="in-price" th:field="*{price}">
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+            </div>
+            <div>
+                <label class="form-label"  for="in-desc">description : </label><br/>
+                <textarea class="form-control" id="in-desc" cols="30" rows="5" th:field="*{description}"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="in-ing" class="form-label">ingredients:</label><br/>
+                <select id="in-ing" class="form-control" th:field="*{ingredientsId}" multiple="multiple">
+                    <option th:each="ing : ${list}"
+                            th:text="${ing.name}"
+                            th:value="${ing.id}">
+                    </option>
+                </select>
+                <span th:if="${#fields.hasErrors('ingredientsId')}" th:errors="*{ingredientsId}"></span>
+            </div>
+            <button class="btn btn-danger" type="submit">Add</button>
+        </div>
+    </form>
+</main>
+<th:block th:replace="~{fragment/footer :: footer}"></th:block>
+<th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+</body>
+</html>

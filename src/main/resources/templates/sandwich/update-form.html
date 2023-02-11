@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sandwich</title>
+  <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragment/header :: header}"></th:block>
+<main>
+<h1>Sandwich update form</h1>
+<form th:action="@{ /sandwich/{id}/update (id=${id}) }" method="post" th:object="${form}">
+
+  <div class="mb-3">
+    <label for="in-name" class="form-label">name:</label><br/>
+    <input type="text" id="in-name" class="form-control" th:field="*{name}">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  </div>
+
+  <div class="mb-3">
+    <label for="in-price" class="form-label">price:</label><br/>
+    <input type="number" class="form-control" id="in-price" th:field="*{price}">
+    <p th:if="${ #fields.hasErrors('price') }" th:errors="*{price}">attention erreur</p>
+  </div>
+
+  <div class="mb-3">
+    <label for="in-desc" class="form-label">description:</label><br/>
+    <p th:if="${ #fields.hasErrors('description') }" th:errors="*{description}">attention erreur</p>
+    <textarea id="in-desc" class="form-control" cols="30" rows="5" th:field="*{description}"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="in-ing" class="form-label">ingredients:</label><br/>
+    <select id="in-ing" class="form-control" th:field="*{ingredientsId}" multiple="multiple">
+      <option th:each="ing : ${list}"
+              th:text="${ing.name}"
+              th:value="${ing.id}">
+      </option>
+    </select>
+    <span th:if="${#fields.hasErrors('ingredientsId')}" th:errors="*{ingredientsId}"></span>
+  </div>
+  <button class="btn btn-danger" type="submit">Update</button>
+</form>
+
+</main>
+<th:block th:replace="~{fragment/footer :: footer}"></th:block>
+<th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+</body>
+</html>

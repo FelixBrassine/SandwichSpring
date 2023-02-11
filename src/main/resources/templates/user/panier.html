@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sandwich</title>
+  <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragment/header :: header}"></th:block>
+<main>
+  <h1>Panier</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <td>id</td>
+      <td>name</td>
+      <td>description</td>
+      <td>price</td>
+      <td>ingredients</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item:${sandwich}" th:object="${item}">
+      <td th:text="*{id}"></td>
+      <td th:text="*{name}"></td>
+      <td th:text="*{description}"></td>
+      <td th:text="*{price}"></td>
+      <td>
+        <ul th:each="ingredient:*{ingredientDTO}" th:object="${ingredient}">
+          <li th:text="*{name}"></li>
+        </ul>
+      </td>
+      <td><a class="btn btn-outline-danger" th:href="@{ /sandwich/{id} (id=*{id}) }">view</a></td>
+    </tr>
+    <tr>
+      <td th:text="*{price}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-danger" href="/sandwich/all">More Sandwich</a>
+  <a class="btn btn-danger">Pay</a>
+</main>
+<th:block th:replace="~{fragment/footer :: footer}"></th:block>
+<th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+</body>
+</html>

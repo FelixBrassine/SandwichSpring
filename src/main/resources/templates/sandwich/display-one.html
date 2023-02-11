@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandwich</title>
+    <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+    <body>
+        <th:block th:replace="~{fragment/header :: header}"></th:block>
+    <main>
+        <h1>Sandwich n° : <span th:text="${sandwich.id}"></span> </h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>name</td>
+                <td>description</td>
+                <td>price</td>
+                <td>ingredients</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="*{sandwich.name}"></td>
+                <td th:text="*{sandwich.description}"></td>
+                <td th:text="*{sandwich.price}"></td>
+                <td>
+                    <ul th:each="ingredient:*{sandwich.ingredientDTO}" th:object="${ingredient}">
+                        <li th:text="*{name}"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-danger" th:href="@{ /sandwich/{id}/update (id=*{id}) }">update</a>
+    </main>
+        <th:block th:replace="~{fragment/footer :: footer}"></th:block>
+        <th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+    </body>
+</html>

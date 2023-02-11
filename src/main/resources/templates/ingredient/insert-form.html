@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandwich</title>
+    <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragment/header :: header}"></th:block>
+<main>
+    <h1>Ingredient insert form</h1>
+    <form action="/ingredient/add" method="post" th:object="${form}">
+        <div class="mb-3">
+            <label class="form-label" for="in-name">name : </label><br/>
+            <input class="form-control" type="text" id="in-name" th:field="*{name}">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <button class="btn btn-danger" type="submit">Save</button>
+    </form>
+</main>
+<th:block th:replace="~{fragment/footer :: footer}"></th:block>
+<th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+</body>
+</html>

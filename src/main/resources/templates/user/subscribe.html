@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sandwich</title>
+  <th:block th:replace="~{fragment/fragments :: base_css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragment/header :: header}"></th:block>
+<main>
+<h1>Register form</h1>
+<form action="/auth/subscribe" method="post" th:object="${form}">
+  <div class="mb-3">
+      <div>
+        <label class="form-label" for="in-email">email : </label><br/>
+        <input class="form-control" type="email", id="in-email" th:field="*{email}">
+        <p th:if="${ #fields.hasErrors('email') }" th:errors="*{email}" style="color: red" ></p>
+      </div>
+
+      <div>
+        <label class="form-label" for="in-password">password : </label><br/>
+        <input class="form-control" type="password", id="in-password" th:field="*{password}">
+        <p th:if="${ #fields.hasErrors('password') }" th:errors="*{password}" style="color: red" ></p>
+      </div>
+
+      <div>
+        <label class="form-label" for="in-passwordValid">comfirm password : </label><br/>
+        <input class="form-control" type="password", id="in-passwordValid" th:field="*{passwordValid}">
+        <p  th:if="${ #fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}" style="color: red" ></p>
+      </div>
+
+      <div>
+        <label class="form-label" for="in-firstname">firstname : </label><br/>
+        <input class="form-control" type="text", id="in-firstname" th:field="*{firstName}">
+        <p th:if="${ #fields.hasErrors('firstName') }" th:errors="*{firstName}" style="color: red" ></p>
+      </div>
+
+      <div>
+        <label class="form-label" for="in-lastname">lastname : </label><br/>
+        <input class="form-control" type="text", id="in-lastname" th:field="*{lastName}">
+        <p th:if="${ #fields.hasErrors('lastName') }" th:errors="*{lastName}" style="color: red" ></p>
+      </div>
+
+      <div>
+        <label class="form-label" for="in-birthdate">birthdate : </label><br/>
+        <input class="form-control" type="date" id="in-birthdate" th:field="*{birthDate}">
+        <p th:if="${ #fields.hasErrors('birthDate') }" th:errors="*{birthDate}" style="color: red" ></p>
+      </div>
+    </div>
+    <button class="btn btn-danger" type="submit">Subscribe</button>
+</form>
+</main>
+<th:block th:replace="~{fragment/footer :: footer}"></th:block>
+<th:block th:replace="~{fragment/fragments :: base_js}"></th:block>
+</body>
+</html>
