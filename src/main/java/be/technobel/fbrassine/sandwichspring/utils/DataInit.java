@@ -1,9 +1,11 @@
 package be.technobel.fbrassine.sandwichspring.utils;
 
 import be.technobel.fbrassine.sandwichspring.models.entity.Ingredient;
+import be.technobel.fbrassine.sandwichspring.models.entity.Panier;
 import be.technobel.fbrassine.sandwichspring.models.entity.User;
 import be.technobel.fbrassine.sandwichspring.models.entity.Sandwich;
 import be.technobel.fbrassine.sandwichspring.repository.IngredientRepository;
+import be.technobel.fbrassine.sandwichspring.repository.PanierRepository;
 import be.technobel.fbrassine.sandwichspring.repository.SandwichRepository;
 import be.technobel.fbrassine.sandwichspring.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
@@ -18,15 +20,18 @@ import java.util.Set;
 @Component
 @Log4j2
 public class DataInit implements InitializingBean {
+    private final PanierRepository panierRepository;
 
     private final SandwichRepository sandwichRepository;
     private final UserRepository userRepository;
     private final IngredientRepository ingredientRepository;
 
-    public DataInit(SandwichRepository sandwichRepository, UserRepository userRepository, IngredientRepository ingredientRepository) {
+    public DataInit(SandwichRepository sandwichRepository, UserRepository userRepository, IngredientRepository ingredientRepository,
+                    PanierRepository panierRepository) {
         this.sandwichRepository = sandwichRepository;
         this.userRepository = userRepository;
         this.ingredientRepository = ingredientRepository;
+        this.panierRepository = panierRepository;
     }
 
     @Override
@@ -89,6 +94,9 @@ public class DataInit implements InitializingBean {
         user.setFirstName("user");
         user.setLastName("customer");
         user.setBirthDate(LocalDate.now());
+        Panier p = new Panier();
+        p = panierRepository.save(p);
+        user.setPanier(p);
 
         user = userRepository.save(user);
 

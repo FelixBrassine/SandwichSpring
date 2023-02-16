@@ -1,10 +1,14 @@
 package be.technobel.fbrassine.sandwichspring.controller;
 
 import be.technobel.fbrassine.sandwichspring.models.dto.SandwichDTO;
+import be.technobel.fbrassine.sandwichspring.models.form.PanierInsertForm;
 import be.technobel.fbrassine.sandwichspring.models.form.SandwichInsertForm;
 import be.technobel.fbrassine.sandwichspring.models.form.SandwichUpdateForm;
+import be.technobel.fbrassine.sandwichspring.repository.SandwichRepository;
 import be.technobel.fbrassine.sandwichspring.service.IngredientService;
+import be.technobel.fbrassine.sandwichspring.service.PanierService;
 import be.technobel.fbrassine.sandwichspring.service.SandwichService;
+import be.technobel.fbrassine.sandwichspring.service.mapper.SandwichMapper;
 import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -17,10 +21,17 @@ public class SandwichController {
 
     private final SandwichService sandwichService;
     private final IngredientService ingredientService;
+    private final PanierService panierService;
+    private final SandwichMapper sandwichMapper;
+    private final SandwichRepository sandwichRepository;
 
-    public SandwichController(SandwichService sandwichService, IngredientService ingredientService) {
+    public SandwichController(SandwichService sandwichService, IngredientService ingredientService, PanierService panierService, SandwichMapper sandwichMapper,
+                              SandwichRepository sandwichRepository) {
         this.sandwichService = sandwichService;
         this.ingredientService = ingredientService;
+        this.panierService = panierService;
+        this.sandwichMapper = sandwichMapper;
+        this.sandwichRepository = sandwichRepository;
     }
 
     @GetMapping("/all")
@@ -82,4 +93,5 @@ public class SandwichController {
         sandwichService.update(id, form);
         return "redirect:/sandwich/all";
     }
+
 }

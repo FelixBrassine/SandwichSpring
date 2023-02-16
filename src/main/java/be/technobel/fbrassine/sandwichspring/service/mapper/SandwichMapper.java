@@ -27,26 +27,6 @@ public class SandwichMapper {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public List<IngredientDTO> ingredientDTOList(Set<Ingredient> ingredients){
-
-        return ingredients.stream()
-                .map(ingredientMapper::toDto)
-                .toList();
-
-//        List<IngredientDTO> ingredientsDTOList = new ArrayList<>();
-//        for(int i = 0; i<ingredients.size(); i++){
-//            Ingredient ingredient = ingredients.stream().toList().get(i);
-//            ingredientsDTOList.add(ingredientMapper.toDto(ingredient));
-//        }
-//        return ingredientsDTOList;
-    }
-//    public List<Ingredient> idToSandwich(Set<Long> ingredientsId){
-//        return ingredientsId.stream()
-//                .map( ingredientMapper :: toEntityById)
-//                .toList();
-//
-//    }
-
     public SandwichDTO toDto(Sandwich entity){
 
         if (entity == null){
@@ -65,7 +45,7 @@ public class SandwichMapper {
                     .build();
         }
     }
-    public Sandwich toEntity(SandwichInsertForm form){
+    public Sandwich formToEntity(SandwichInsertForm form){
         if (form == null){
             return null;
         }else{

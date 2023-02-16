@@ -15,9 +15,6 @@ main {
 main>*{
     margin: 30px;
 }
-form >* {
-    margin: 10px;
-}
 .multiselect {
     width: 200px;
 }

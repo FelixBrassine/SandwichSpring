@@ -52,9 +52,9 @@ public class SandwichServiceImpl implements SandwichService {
         if (form == null){
             throw new IllegalArgumentException("form should be not null");
         }else{
-            Sandwich entity = mapper.toEntity(form);
+            Sandwich entity = mapper.formToEntity(form);
             entity.setIngredients(
-                    new HashSet<>((ingredientRepository.findAllById(form.getIngredientsId())))
+                    new HashSet<>(ingredientRepository.findAllById(form.getIngredientsId()))
             );
             sandwichRepository.save(entity);
         }

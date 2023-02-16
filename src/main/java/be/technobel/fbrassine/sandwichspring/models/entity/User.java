@@ -31,4 +31,7 @@ public class User {
     private Boolean enabled =true;
     @Column(nullable = false)
     private Boolean blackListed =false;
+    @OneToOne
+    @JoinColumn(name = "panier_id", nullable = false)
+    private Panier panier;
 }

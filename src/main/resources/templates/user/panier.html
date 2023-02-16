@@ -20,7 +20,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="item:${sandwich}" th:object="${item}">
+    <tr th:each="item:${sandwichs}" th:object="${item}">
       <td th:text="*{id}"></td>
       <td th:text="*{name}"></td>
       <td th:text="*{description}"></td>
@@ -30,10 +30,16 @@
           <li th:text="*{name}"></li>
         </ul>
       </td>
+      <td>
+        <form th:action="@{ /panier/{id}/remove (id=*{id}) }" method="post">
+          <button type="submit" class="btn btn-outline-danger" th:field="*{id}">remove</button>
+        </form>
+      </td>
       <td><a class="btn btn-outline-danger" th:href="@{ /sandwich/{id} (id=*{id}) }">view</a></td>
     </tr>
     <tr>
-      <td th:text="*{price}"></td>
+      <td>total</td>
+      <td th:text="${total}"></td>
     </tr>
     </tbody>
   </table>

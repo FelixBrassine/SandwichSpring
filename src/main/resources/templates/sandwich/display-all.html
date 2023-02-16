@@ -33,7 +33,11 @@
                 </td>
                 <td><a class="btn btn-outline-danger" th:href="@{ /sandwich/{id} (id=*{id}) }">view</a></td>
                 <td><a class="btn btn-outline-danger" th:href="@{ /sandwich/{id}/update (id=*{id}) }">update</a></td>
-                <td><a class="btn btn-outline-danger" th:href="@{ /panier/{id}/buy (id=*{id}) }" >buy</a></td>
+                <td>
+                    <form th:action="@{ /panier/{id}/buy (id=*{id}) }" method="post">
+                        <button type="submit" class="btn btn-outline-danger" th:field="*{id}">buy</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

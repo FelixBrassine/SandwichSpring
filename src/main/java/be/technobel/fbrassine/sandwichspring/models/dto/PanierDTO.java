@@ -9,4 +9,5 @@ import java.util.List;
 @Builder
 public class PanierDTO {
     private long id;
+    private double total;
 }
